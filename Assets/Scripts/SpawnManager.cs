@@ -9,6 +9,10 @@ public class SpawnManager : MonoBehaviour
 	[SerializeField]
 	private GameObject _tripleshotpowerupprefab;
 	[SerializeField]
+	private GameObject _speedpowerupprefab;
+	[SerializeField]
+	private GameObject[] _powerups;
+	[SerializeField]
 	private GameObject _enemycontainer;
 	[SerializeField]
 	private bool _stopspawning = false;
@@ -16,7 +20,9 @@ public class SpawnManager : MonoBehaviour
 	void Start()
 	{
 		StartCoroutine(SpawnEnemyRoutine());
-		StartCoroutine(SpawnTripleShotPowerUpRoutine());
+		//StartCoroutine(SpawnTripleShotPowerUpRoutine());
+		//StartCoroutine(SpawnSpeedPowerUpRoutine());
+		StartCoroutine(SpawnPowerUpRoutine());
 	}
 	
 	IEnumerator SpawnEnemyRoutine(){
@@ -33,6 +39,21 @@ public class SpawnManager : MonoBehaviour
 			Vector3 posToSpawn = new Vector3(Random.Range(-8f,8f),7,0);
 			Instantiate(_tripleshotpowerupprefab, posToSpawn, Quaternion.identity);
 			yield return new WaitForSeconds(Random.Range(3,8));
+		}
+	}
+	IEnumerator SpawnSpeedPowerUpRoutine(){
+		while (_stopspawning == false){
+			Vector3 posToSpawn = new Vector3(Random.Range(-8f,8f),7,0);
+			Instantiate(_speedpowerupprefab, posToSpawn, Quaternion.identity);
+			yield return new WaitForSeconds(Random.Range(3,8));
+		}
+	}
+	IEnumerator SpawnPowerUpRoutine(){
+		while (_stopspawning == false){
+			Vector3 posToSpawn = new Vector3(Random.Range(-8f,8f),7,0);
+			int randomPowerUp = Random.Range(0,2);
+			Instantiate(_powerups[randomPowerUp], posToSpawn, Quaternion.identity);
+			yield return new WaitForSeconds(Random.Range(3f,8f));
 		}
 	}
 	

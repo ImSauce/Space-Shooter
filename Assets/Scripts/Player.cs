@@ -16,7 +16,13 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	private bool _istripleshotactive = false;
 	[SerializeField]
+	private float _speedmultiplier = 2f;
+	[SerializeField]
+	private bool _isspeedboostactive = false;
+	[SerializeField]
 	private GameObject _tripleshot;
+
+
 
 	private SpawnManager _spawnmanager;
 
@@ -48,7 +54,14 @@ public class Player : MonoBehaviour
 		float horizontalInput = Input.GetAxis("Horizontal");
 		float verticalInput = Input.GetAxis("Vertical");
 		Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
-		transform.Translate(direction * _speed * Time.deltaTime);
+		if (_isspeedboostactive == false)
+		{
+			transform.Translate(direction * _speed * Time.deltaTime);
+		}
+		else
+		{
+			transform.Translate(direction * (_speed * _speedmultiplier) * Time.deltaTime);
+		}
 
 		transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
 
@@ -95,6 +108,24 @@ public class Player : MonoBehaviour
 			_istripleshotactive = false;
 		}
 	}
+
+	public void SpeedBoostActive()
+	{
+		_isspeedboostactive = true;
+		_speed *= _speedmultiplier;
+
+		StartCoroutine(SpeedBoostPowerDownRoutine());
+	}
+	IEnumerator SpeedBoostPowerDownRoutine()
+	{
+		while (_isspeedboostactive == true)
+		{
+			yield return new WaitForSeconds(5.0f);
+			_isspeedboostactive = false;
+			_speed /= _speedmultiplier;
+		}
+	}
+
 	
 
 }
