@@ -36,7 +36,7 @@ public class PowerUp : MonoBehaviour
                         break;
                     case 2:
                         Debug.Log("shield");
-                        //player.TripleShotActive();
+                        player.ShieldsActive();
                         break;
                     default:
                         Debug.Log("default");

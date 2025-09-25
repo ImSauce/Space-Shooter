@@ -14,15 +14,15 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	private int _lives = 3;
 	[SerializeField]
-	private bool _istripleshotactive = false;
-	[SerializeField]
 	private float _speedmultiplier = 2f;
 	[SerializeField]
-	private bool _isspeedboostactive = false;
-	[SerializeField]
 	private GameObject _tripleshot;
+	[SerializeField]
+	private GameObject _shieldvisualizer;
 
-
+	private bool _istripleshotactive = false;
+	private bool _isspeedboostactive = false;
+	private bool _isshieldactive = false;
 
 	private SpawnManager _spawnmanager;
 
@@ -84,6 +84,13 @@ public class Player : MonoBehaviour
 
 	public void Damage()
 	{
+		if (_isshieldactive == true)
+		{
+			Debug.Log("shield damaged!");
+			_isshieldactive = false;
+			_shieldvisualizer.SetActive(false);
+			return;
+		}
 		_lives -= 1;
 
 		if (_lives < 1)
@@ -124,6 +131,12 @@ public class Player : MonoBehaviour
 			_isspeedboostactive = false;
 			_speed /= _speedmultiplier;
 		}
+	}
+
+	public void ShieldsActive()
+	{
+		_isshieldactive = true;
+		_shieldvisualizer.SetActive(true);
 	}
 
 	
