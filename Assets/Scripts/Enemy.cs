@@ -3,6 +3,9 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 	[SerializeField]
+	private Player _player;
+
+	[SerializeField]
 	private float _speed = 4.0f;
 
     void Update()

@@ -3,6 +3,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+	[SerializeField]
+	private int _score;
+
+
+
 	[SerializeField]
 	private float _speed = 3.5f;
 	[SerializeField]
@@ -139,6 +145,11 @@ public class Player : MonoBehaviour
 		_shieldvisualizer.SetActive(true);
 	}
 
+
+	public void AddScore(int points)
+	{
+		_score += points;
+	}
 	
 
 }
