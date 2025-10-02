@@ -689,6 +689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyprefab: {fileID: 190221054741708277, guid: d682b80886f65504d8ca28265c4a0fae, type: 3}
+  _enemyprefab2: {fileID: 8491664436351798175, guid: 8f013be4f663c37489aa95ce415a09ad, type: 3}
   _tripleshotpowerupprefab: {fileID: 3074013930220339857, guid: 6cba891f910d14d4b87cbde67582e8a7, type: 3}
   _speedpowerupprefab: {fileID: 6812707364403307995, guid: 4395952b9dc759940bdf538e8be7e0f8, type: 3}
   _powerups:

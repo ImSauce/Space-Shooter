@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	private int _score;
 
-
+	private UIManager _uiManager;
 
 	[SerializeField]
 	private float _speed = 3.5f;
@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
 	{
 		//take the current position = new position (0,0,0)
 		transform.position = new Vector3(0, -3.5f, 0);
+
+		_uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
 
 		_spawnmanager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
 		if (_spawnmanager == null)
@@ -99,6 +101,8 @@ public class Player : MonoBehaviour
 		}
 		_lives -= 1;
 
+		_uiManager.UpdateLives(_lives);
+
 		if (_lives < 1)
 		{
 			_spawnmanager.OnPlayerDeath();
@@ -149,7 +153,10 @@ public class Player : MonoBehaviour
 	public void AddScore(int points)
 	{
 		_score += points;
+		_uiManager.UpdateScore(_score);
 	}
+
+	
 	
 
 }
